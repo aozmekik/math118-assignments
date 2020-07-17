@@ -1,0 +1,194 @@
+\documentclass[a4 paper]{article}
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage[ruled]{algorithm2e}
+\usepackage[rgb]{xcolor}
+\usepackage{verbatim}
+\usepackage{subcaption}
+\usepackage{amsgen,amsmath,amstext,amsbsy,amsopn,tikz,amssymb,tkz-linknodes}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true, urlcolor=blue,  linkcolor=blue, citecolor=blue]{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{rotating}
+\usepackage{booktabs}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{rem}[thm]{Remark}
+\numberwithin{equation}{section}
+
+\newcommand{\homework}[6]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{page}{1}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf MATH 118:~Statistics and Probability \hfill {\small (#2)}} }
+       \vspace{6mm}
+       \hbox to 6.28in { {\Large \hfill #1  \hfill} }
+       \vspace{6mm}
+       \hbox to 6.28in { {\it Instructor: {\rm #3} \hfill Name: {\rm #5} \hfill Student Id: {\rm #6}} \hfill}
+       \hbox to 6.28in { {\it Assistant: #4  \hfill #6}}
+      \vspace{2mm}}
+   }
+   \end{center}
+   \markboth{#5 -- #1}{#5 -- #1}
+   \vspace*{4mm}
+}
+
+\newcommand{\problem}[2]{~\\\fbox{\textbf{Problem #1}}\hfill (#2 points)\newline\newline}
+\newcommand{\subproblem}[1]{~\newline\textbf{(#1)}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\Hy}{\mathcal{H}}
+\newcommand{\VS}{\textrm{VS}}
+\newcommand{\solution}{~\newline\textbf{\textit{(Solution)}} }
+
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bepsilon}{\boldsymbol{\epsilon}}
+\newcommand{\balpha}{\boldsymbol{\alpha}}
+\newcommand{\bbeta}{\boldsymbol{\beta}}
+\newcommand{\0}{\mathbf{0}}
+
+
+\begin{document}
+\homework{Homework \#1}{Due: 15/03/20}{Dr. Zafeirakis Zafeirakopoulos}{Gizem S\"ung\"u}{}{}
+\textbf{Course Policy}: Read all the instructions below carefully before you start working on the assignment, and before you make a submission.
+\begin{itemize}
+\item It is not a group homework. Do not share your answers to anyone in any circumstance. Any cheating means at least -100 for both sides. 
+\item Do not take any information from Internet.
+\item No late homework will be accepted. 
+\item For any questions about the homework, come to my office hour.
+\item After the office hour, no questions about the homework by email will be responded.
+\item Submit your homework (both your latex and pdf files in a zip file) into the course page of Moodle.
+\item Save your latex, pdf and zip files as "Name\_Surname\_StudentId".\{tex, pdf, zip\}.
+\item The deadline of the homework is 15/03/20 23:55.
+\end{itemize}
+
+\problem{1: Counting Sample Points}{5+5+5=15}
+\subproblem{a} How many three-digit numbers can be formed from the digits 0, 1, 2, 3, 4, 5, and 6 if each digit can be used only once?\newline
+\solution
+\newline
+\subproblem{b} How many of these are odd numbers?\newline
+\solution
+\newline
+\subproblem{c} How many are greater than 330?\newline
+\solution
+\newline
+
+
+
+\problem{2: Conditional Probability, Independence, and the Product Rule}{10+10=20}
+The probability that a randomly chosen coffee machine will need a coffee bean change is 0.25; the probability that it needs a new filter is 0.40; and the probability that both the bean and filter need changing is 0.14.\newline
+\subproblem{a} If the bean has to be changed, what is the probability that a new filter is needed?\newline
+\solution
+\newline
+\subproblem{b} If a new filter is needed, what is the probability that the bean has to be changed?\newline
+\solution
+\newline
+\newpage
+\problem{3: Conditional Probability, Independence, and the Product Rule}{5+5+5+5 = 20}
+Before the distribution of certain task, every fourth machine is tested for accuracy. The testing process consists of running four independent tasks and checking the results. The failure rates for the four testing tasks are, respectively, 0.01, 0.03, 0.02, and 0.01.\newline
+
+\subproblem{a}What is the probability that a machine was tested and
+failed any test?\newline
+\solution
+\newline
+\subproblem{b} Given that a machine was tested, what is the probability
+that it failed task 2 or 3?\newline
+\solution
+\newline
+\subproblem{c} In a sample of 100, how many machines would you expect to be rejected?\newline
+\solution
+\newline
+\subproblem{d} Given that a machine was defective, what is the probability that it was tested?\newline
+\solution
+\newline
+\newline
+\problem{4: Random Variables }{1+1+1+1+1=5}
+Classify the following random variables as discrete or continuous:\newline
+\subproblem{a} X: the number of automobile accidents per year
+in Virginia.\newline
+\solution
+\newline
+\subproblem{b} Y: the length of time to play 18 holes of golf.\newline
+\solution
+\newline
+\subproblem{c} M: the amount of milk produced yearly by a particular cow.\newline
+\solution
+\newline
+\subproblem{d} N: the number of eggs laid each month by a hen.\newline
+\solution
+\newline
+\subproblem{e} P: the number of building permits issued each
+month in a certain city.\newline
+\solution
+
+\newpage
+
+\problem{5: Probability Distributions of Random Variables}{5+5+5+5=20}
+An investment firm offers its customers municipal bonds that mature after varying numbers of years. Given that the cumulative distribution function of T , the number of years to maturity for a randomly selected bond, is\newline
+F(t) =     $\left\{ 
+                \begin{array}{rcl}
+                     0, & t < 1, \\
+                     &\\
+                      \frac{1}{4}, & 1 \leq t < 3,\\
+                      &\\
+                      \frac{1}{2}, & 3 \leq t < 5,\\
+                      &\\
+                      \frac{3}{4}, & 5 \leq t < 7,\\
+                      &\\
+                      1, & t \geq 7
+                 \end{array}
+            \right.$
+
+
+
+Find
+\subproblem{a} P(T = 5)\newline
+\solution
+\newline
+\subproblem{b} P(T $>$ 3)\newline
+\solution
+\newline
+\subproblem{c} P(1.4 $<$ T $<$ 6)\newline
+\solution
+\newline
+\subproblem{d} P(T $\leq$ 5 $|$ T $\geq$ 2)\newline
+\solution
+\newline
+\newline
+\problem{6: Probability Distributions of Random Variables}{5+5+10=20}
+A manufacturer is aware that the weight of the product in the box varies slightly from box to box. There is a density function which is obtained from historical data. The density function describes the probability structure for the weight (inounces). Letting X be the random variable weight, inounces, the density function can be described as\newline
+\newline
+
+f(x) =     $\left\{ 
+                \begin{array}{rcl}
+                     \frac{2}{5}, & 23.75 \leq x \leq 26.25 \\
+                              &\\
+                      0, & elsewhere
+                 \end{array}
+            \right.$
+\newline
+\subproblem{a} Verify that this is a valid density function.\newline
+\solution
+\newline
+\subproblem{b} Determine the probability that the weight is smaller than 24 ounces.\newline
+\solution
+\newline
+\subproblem{c} The company desires that the weight exceeding 26 ounces be an extremely rare occurrence. What is the probability that this rare occurrence does actually occur?\newline
+\solution
+\newline
+\end{document} 
+
+

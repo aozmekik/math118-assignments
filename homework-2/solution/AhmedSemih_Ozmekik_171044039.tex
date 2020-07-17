@@ -1,0 +1,392 @@
+\documentclass[a4 paper]{article}
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage[ruled]{algorithm2e}
+\usepackage[rgb]{xcolor}
+\usepackage{verbatim}
+\usepackage{subcaption}
+\usepackage{amsgen,amsmath,amstext,amsbsy,amsopn,tikz,amssymb,tkz-linknodes}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true, urlcolor=blue,  linkcolor=blue, citecolor=blue]{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{rotating}
+\usepackage{booktabs}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{rem}[thm]{Remark}
+\numberwithin{equation}{section}
+
+\usepackage{mathtools}
+
+\newcommand\Myperm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+\newcommand\Mycomb[2][^n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+
+
+\newcommand{\homework}[6]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{page}{1}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf MATH 118:~Statistics and Probability \hfill {\small (#2)}} }
+       \vspace{6mm}
+       \hbox to 6.28in { {\Large \hfill #1  \hfill} }
+       \vspace{6mm}
+       \hbox to 6.28in { {\it Instructor: {\rm #3} \hfill Name: Ahmed Semih Özmekik {\rm #5} \hfill Student Id: 171044039 {\rm #6}} \hfill}
+       \hbox to 6.28in { {\it Assistant: #4  \hfill #6}}
+      \vspace{2mm}}
+   }
+   \end{center}
+   \markboth{#5 -- #1}{#5 -- #1}
+   \vspace*{4mm}
+}
+
+\newcommand{\problem}[2]{~\\\fbox{\textbf{Problem #1}}\hfill (#2 points)\newline\newline}
+\newcommand{\subproblem}[1]{~\newline\textbf{(#1)}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\Hy}{\mathcal{H}}
+\newcommand{\VS}{\textrm{VS}}
+\newcommand{\solution}{~\newline\textbf{\textit{(Solution)}} }
+
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bepsilon}{\boldsymbol{\epsilon}}
+\newcommand{\balpha}{\boldsymbol{\alpha}}
+\newcommand{\bbeta}{\boldsymbol{\beta}}
+\newcommand{\0}{\mathbf{0}}
+
+\usepackage{mathtools}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+
+\begin{document}
+\homework{Homework \#2}{Due: 26/04/20}{Dr. Zafeirakis Zafeirakopoulos}{Gizem S\"ung\"u}{}{}
+\textbf{Course Policy}: Read all the instructions below carefully before you start working on the assignment, and before you make a submission.
+\begin{itemize}
+\item It is not a group homework. Do not share your answers to anyone in any circumstance. Any cheating means at least -100 for both sides. 
+\item Do not take any information from Internet.
+\item No late homework will be accepted. 
+\item For any questions about the homework, send an email to gizemsungu@gtu.edu.tr.
+\item Submit your homework (both your latex and pdf files in a zip file) into the course page of Moodle.
+\item Save your latex, pdf and zip files as "Name\_Surname\_StudentId".\{tex, pdf, zip\}.
+\item The deadline of the homework is 26/04/20 23:55.
+\end{itemize}
+
+\problem{1:}{10}
+Suppose that you are inspecting a lot of 1000 surgical masks, among which 20 are used. You choose two masks randomly from the lot without replacement. Let\\
+
+$X_1$ =     $\left\{ 
+                \begin{array}{rc}
+                     1, &  \text{if the 1st surgical mask is used},\\
+                              &\\
+                      0, & \text{otherwise}
+                 \end{array}
+            \right.$
+            
+\bigskip
+
+$X_2$ =     $\left\{ 
+                \begin{array}{rc}
+                     1, &  \text{if the 2nd surgical mask is used},\\
+                              &\\
+                      0, & \text{otherwise}
+                 \end{array}
+            \right.$
+\bigskip
+
+Find the probability that at least one surgical mask chosen is used. \\
+\solution
+\newline \newline
+The probability we concern is an example of discrete probability distribution that describes the probability of $k$ successes (random draws for which the object drawn has a specified feature) in $n$ draws; which is hypergeometric distribution.
+
+A random variable $X$ follows the hypergeometric distribution: \newline \newline
+$p_X(k) = (X = k) = \frac{ \binom{K}{k} \binom{N-K}{n-k}}{\binom{N}{n}}$\newline
+where
+\begin{itemize}{}
+\item $N$ is the population size,
+\item $K$ is the number of success states in the population,
+\item $n$ is the number of draws (i.e. quantity drawn in each trial),
+\item $k$ is the number of observed successes,
+\item $\binom{a}{b}$ is a binomial coefficient.
+\end{itemize}{}
+
+After defining our problem, since $X_1$ and $X_2$ are disjoint, we need to find the probability of each, and then add them up. Here is our substitution: \newline
+\begin{align*}
+    p_X(k) &= \frac{ \binom{K}{k} \binom{N-K}{n-k}}{\binom{N}{n}} \\
+    p_X(k) &= \frac{ \binom{20}{x} \binom{980}{2-x}}{\binom{1000}{2}}\\
+\end{align*}{}
+\newline Let's find $p_X(X_1)$ and $p_X(X_2)$: \newline
+\begin{align*}
+    p_X(1) &= \frac{ \binom{20}{1} \binom{980}{1}}{\binom{1000}{2}}\\
+    p_X(1) &= 0.03923923923923924
+\end{align*}{}
+\begin{align*}
+    p_X(2) &= \frac{ \binom{20}{2}}{\binom{1000}{2}}\\
+    p_X(2) &= 0.0003803803803803804
+\end{align*}{}
+\begin{align*}
+    p_X(1) + p_X(1)  &= 0.03961961961961962
+\end{align*}{}
+\problem{2:}{8+8=16}
+Suppose X and Y are random variables with P(X = 1) = P(X = -1) = $\frac{1}{2}$; P(Y = 1) = P(Y = -1) = $\frac{1}{2}$. Let c = P(X = 1 and Y = 1).\\
+
+\subproblem{a} Determine the joint distribution of X and Y, Cov(X, Y), and Cor(X, Y).\\
+\solution \newline
+We need to find the partial function $F(x, y)$. Regarding to definition given above, we know:
+\begin{align*}
+    P(X = 1) = P(X = -1) &= \frac{1}{2} \\
+    P (X = 1) + P (X = −1) &= 1 \\
+    P (X = x_1) &= 0 \intertext{where $x_1 = 1$, or $x_1 = -1$.}
+\end{align*}
+
+Hence,
+
+\begin{align*}
+    f (x, -1) &= F (1, -1) + F (-1, -1) = \frac{1}{2}  \\
+F (x, 1) &= F (1, 1) + F (-1, 1) = \frac{1}{2}   \\
+F (-1, y) &= F (-1, -1) + F (-1, 1) = \frac{1}{2}   \\
+F (1, y) &= F (1, -1) + F (1, 1) = \frac{1}{2}   \\
+\end{align*}{}
+\begin{align*}
+    F (-1, -1) &= c \\ F (-1, 1) &= \frac{1}{2}-c \\ F (1, −1) &= \frac{1}{2}-c \\  F (1, 1) &= c.
+\end{align*}{}
+
+$F(x, y)$ =     $\left\{ 
+                \begin{array}{rc}
+                     c, &  \text{x= -1, y = -1},\\
+                      \frac{1}{2} - c, & \text{x=-1, y=1} \\
+                      \frac{1}{2} -c, &  \text{x= 1, y = -1},\\
+                    c, &  \text{x= 1, y = 1},\\
+                      
+                 \end{array}
+            \right.$
+\\
+\newline \newline Now let's find value of  Cov(X, Y). The sample covariance matrix is a K-by-K matrix. $Q = \begin{bmatrix}
+q_{jk}
+\end{bmatrix}$ And it can be shown as, $q_{jk} = \frac{1}{N-1} \sum_{i=1}^{N} (x_{ij} - \bar{x}_{j}) (x_{ik} - \bar{x}_{k}). 
+\\
+
+Or, $Cov(X,Y)=E(XY)-E(X)E(Y) = E(XY ) - \mu x μ \mu y$.
+\\
+\begin{align*}
+    E(XY) &= \sum_{i}\sum_{j}x_iy_iF_{xy}(x_i,y_i) \\
+    &= \sum_{i}\sum_{j}x_iy_iF_x(x_i)yF_y(y_j) \\
+    &=(\sum_{i}x_iF_x(x_i))(\sum_{j}y_jF_y(y_j)) \\
+    &= E(X) E(Y) \\
+    &= \sum_{x}x(\sum_{y}F(x, y)y) \\
+    &= \sum_{x}(-f(x, -1) + f(x, 1)) \\
+    &= \sum_{x}(-f(x, -1) + f(x, 1)) \\
+    &= f(-1, -1) - f(-1, 1) - f(-1, 1) - f(1, -1) + f(1, 1)
+\end{align*}{}
+
+\begin{align*}
+    \mu x &= \sum_{x}g(x)x \\
+    &= -1 \frac{1}{2} + 1\frac{1}{2} \\
+    &= 0
+\end{align*}{}
+\begin{align*}
+    \mu y &= \sum_{y}h(y)y \\
+    &= -1 \frac{1}{2} + 1\frac{1}{2} \\
+    &= 0
+\end{align*}{}
+
+\begin{align*}
+    Cov(X,Y) &= E(XY ) - \mu x μ \mu y \\
+    &= c - \frac{1}{2} + c - \frac{1}{2} + c + c\\
+    &= 4c-1
+\end{align*}{}
+
+\begin{align*}
+    Cor(X,Y) &= \frac{\sigma_{xy}}{\sigma_x \sigma_y}\\
+    \sigma_x^2 &= E(X^2) - \mu_x^2 = E(X^2) \\
+    E(X^2) &= \sum_{x}x^2f_1(x) = f_1(1) + f_1(-1) \\
+    &= \frac{1}{2} + \frac{1}{2} = 1 \\
+    \sigma_y^2 &= E(Y^2) - \mu_y^2 = E(Y^2) \\
+    E(Y^2) &= \sum_{y}y^2f_2(y) = f_2(1) + f_2(-1) \\
+    &= \frac{1}{2} + \frac{1}{2} = 1 \\
+\end{align*}{}
+
+\begin{align*}
+    Cor(X,Y) &= \frac{\sigma_{xy}}{\sigma_x \sigma_y}\\
+    &= 4c-1
+\end{align*}{}
+
+
+\newline
+\subproblem{b} For what value(s) of c are X and Y independent? For what value(s) of c are X and Y 100\% correlated?\\
+\solution\\
+Independence: $F (x, y) = f_1(x)f_2(y)$. Remember our equation from above:
+\begin{align*}
+   E(X, Y) &=  \sum_{x}(\sum_{y}F(x, y)xy) \\
+   &= \sum_{x}xf_1(x)\sum_{y}yf_2(y) \\
+   &= (f_1(-1) + f_1(1)) \times ( −f_2(-1) + f_2(1)) \\
+   &= (\frac{1}{2} - \frac{1}{2}) \times (\frac{1}{2} - \frac{1}{2}) \\
+   &= 0 \\
+   E(x, y) &= 0 \\
+   4c - 1 &= 0 \\
+   c &= \frac{1}{4} 
+\end{align*}{}
+
+To satisfy \%100 correlation:
+
+\begin{align*}
+    \abs{Cor(X, Y)} &= 1 \\
+    \abs{4c-1} &= 0 \\
+    c_1 &= \frac{1}{2} \\ 
+    c_2 &= 0 
+\end{align*}{}
+
+\bigskip
+\bigskip
+\problem{3:}{4+4+4+4+4+4=24}
+In the information security department in a software company, a single crucial program works only 85\% of the time. In order to enhance the reliability of the system, it is decided that 3 programs will be installed in parallel such that the system fails only if they all fail. Assume the programs act independently and that they are equivalent in the sense that all 3 of them have an 85\% success rate. Consider the random variable X as the number of components out of 3 that fail.\\
+
+\subproblem{a} Write out a probability function for the random variable $X$.\\
+\solution \\
+In the theory of probability and statistics, a Bernoulli trial (or binomial trial) is a random experiment with exactly two possible outcomes, "success" and "failure", in which the probability of success is the same every time the experiment is conducted. \\
+
+The probability of exactly $k$ successes in the experiment $B ( n , p )$  is given by: 
+\begin{align*}
+    P(k) &= \binom{n}{k} p^k q^{n-k}
+\end{align*}{}
+
+Let's substitute.
+\begin{align*}
+    P(x) &= B(x; n, p) = b(x, 3, 15 / 100) \\
+    &= \binom{3}{x} (\frac{15}{100})^x (\frac{85}{100})^{3-x} 
+\end{align*}{}
+\newline
+\subproblem{b} What is $E(X)$ (i.e., the mean number of programs out of 3 that fail)?\\
+\solution \\
+\begin{align*}
+    \mu &= np \\
+    \mu &= 3 (\frac{15}{100}) \\
+    &= \frac{45}{100}
+\end{align*}{}
+\newline
+\subproblem{c} What is Var(X)?\\
+\solution \\
+\begin{align*}
+    Var(x) &= np(1-p) \\
+    &= 3 \frac{15}{100}\frac{85}{100} \\
+    &= 0.3825
+\end{align*}{}
+\newline
+\subproblem{d} What is the probability that the entire system is successful?\\
+\solution \\
+For success, in 3 attempts, there can be fails as the following 0, 1, 2. Meaning that:
+\begin{align*}
+    f(0) + f(1) + f(2) &= 1 - f(3) \\ 
+    &= 1 - \binom{3}{3} (\frac{15}{100})^3 \\
+    &= 0.996625
+\end{align*}{}
+\newline
+\subproblem{e} What is the probability that the system fails?\\
+\solution \\
+For fail, in 3 attempts, 3 tests should fail. Meaning that:
+\begin{align*}
+    f(3) &= \binom{3}{3} \frac{15}{100} \\
+    &= 0.003375
+\end{align*}{}
+\newline
+\subproblem{f} If the desire is to have the system be successful with probability 0.99, are three programs sufficient? If not, how many are required?\\
+\solution \\
+$0.996625$ is greater than $0.99$. Hence, it is sufficient.
+\problem{4:}{10+10=20}
+According to World Health Organization (WHO), approximately 30\% of all treatment failures in Covid-19 are caused by lack of available respirators.\\
+\subproblem{a} What is the probability that out of the next 20 treatment failures at least 10 are due to lack of available respirators?\\
+\solution \\
+Again, the probability of exactly $k$ successes in the experiment $B ( n , p )$  is given by: 
+\begin{align*}
+    P(k) &= b(x, n, p) = \binom{n}{k} p^k q^{n-k} \\
+    &= \binom{20}{x}(\frac{3}{10})^x(\frac{7}{10})^{20-x}
+\end{align*}{}
+
+We will sum up the probabilities from $x = 10$ to $x = 20$ as stated in the question.
+
+\begin{align*}
+    P &= \sum_{x=10}^{20} f(x) \\
+    &= \binom{20}{10}(\frac{3}{10})^10(\frac{7}{10})^{20-10} + \binom{20}{11}(\frac{3}{10})^11(\frac{7}{10})^{20-11}  + ... \\
+    &= 0.04796189733
+\end{align*}{}
+\newline
+\subproblem{b} What is the probability that no more than 4 out of 20 such failures are due to lack of available respirators?\\
+\solution \\
+Again, for this question, only our boundaries will change. Hence
+\begin{align*}
+    P &= \sum_{x=0}^{4} f(x) \\
+    &= \binom{20}{0}(\frac{3}{10})^0(\frac{7}{10})^{20-0}  + ... \\
+    &= 0.23750777887760
+\end{align*}{}
+
+\problem{5:}{7+7=14}
+A manufacturing company uses an acceptance scheme on items from a production line before they
+are shipped. The plan is a two-stage one. Boxes of 25 items are ready for shipment, and a sample of 3 items is tested for defectives. If any defectives are found, the entire box is sent back for 100\% screening. If no defectives are found, the box is shipped.\\
+\subproblem{a} What is the probability that a box containing 3 defectives will be shipped?\\
+\solution \\
+We can determine the probability with a simple count. Once 
+\begin{align*}
+    P &= \frac{\binom{22}{3}}{\binom{25}{3}} \\
+    &= \frac{77}{115}
+\end{align*}{}
+\newline
+\subproblem{b} What is the probability that a box containing only 1 defective will be sent back for screening?\\
+\solution \\
+First of all, as in any case, we will pick 3 out of 25, $\binom{3}{25}$. Then, from this space we know that there is only 1 defective and we are looking for this defective item to appear. Of course, now we know that there are 24 items left which are non-defective. So we have 3 test. For 2 of them we pick $\binom{24}{2}$. Meaning that, we make sure that for 3 tests we picked 2 as non-defective. And we have only 1 defective left, if we are to pick this, we could've picked it as $\binom{1}{1}$, but since there is only left, we have no choice but to pick the only one. So this makes the probability:
+\begin{align*}
+    P &= \frac{\binom{24}{2}}{\binom{25}{3}} \\
+    &= \frac{3}{25} \\
+    &= 0.12
+\end{align*}{}
+
+
+\problem{6: Probability Distributions of Random Variables}{8+8=16}
+Suppose the probability that any given person will believe a tale about the transgressions of a famous actress is 0.8. What is the probability that\\
+\subproblem{a} the sixth person to hear this tale is the fourth one to believe it?\\
+\solution \\
+We want the sixth person to hear it to be the fourth person to believe it. So 3 person will believe this tale. But 6 person will hear it. Let's go by one up to to 5th person, but of course we need to handle the orders. Because of that, we pick 3 persons out of 5, as a beliver with $\binom{5}{3}$. And multiply this by with the believing probability (for each), which is $\binom{3}{5}(\frac{8}{10})^3$. And now we skip two people by picking them as an non-believer. To do this, let's multiply it with $(\frac{2}{10})^2$:
+\begin{align*}
+    &= \binom{3}{5}(\frac{8}{10})^3 (\frac{2}{10})^2
+\end{align*}{}
+This is just before the last believer, which is 4th believer, and the 6th person:
+\begin{align*}
+    &= \binom{3}{5}(\frac{8}{10})^3 (\frac{2}{10})^2 \frac{8}{10} \\
+    &= \binom{3}{5}(\frac{8}{10})^4 (\frac{2}{10})^2 \\
+    &= 0.16384
+\end{align*}{}
+\newline
+\subproblem{b} the third person to hear this tale is the first one to believe it?\\
+\solution \\
+First two person will not believe it. Again probability of not believing is $0.2$, Probability of the the two person will not believe is, $(\frac{2}{10})^2$. And then we multiply this by $0.8$, since the third person will believe it:
+\begin{align*}
+    P &= (\frac{2}{10})^2\frac{8}{10} \\
+    &= \frac{4}{125} \\
+    &= 0.032
+\end{align*}
+\end{document} 
+
+

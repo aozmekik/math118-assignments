@@ -1,0 +1,272 @@
+\documentclass[a4 paper]{article}
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage[ruled]{algorithm2e}
+\usepackage[rgb]{xcolor}
+\usepackage{verbatim}
+\usepackage{subcaption}
+\usepackage{amsgen,amsmath,amstext,amsbsy,amsopn,tikz,amssymb,tkz-linknodes}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true, urlcolor=blue,  linkcolor=blue, citecolor=blue]{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{rotating}
+\usepackage{booktabs}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{rem}[thm]{Remark}
+\numberwithin{equation}{section}
+
+\newcommand{\homework}[6]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{page}{1}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf MATH 118:~Statistics and Probability \hfill {\small (#2)}} }
+       \vspace{6mm}
+       \hbox to 6.28in { {\Large \hfill #1  \hfill} }
+       \vspace{6mm}
+       \hbox to 6.28in { {\it Instructor: {\rm #3} \hfill Name: Ahmed Semih Özmekik {\rm #5} \hfill Student Id: 171044039 {\rm #6}} \hfill}
+       \hbox to 6.28in { {\it Assistant: #4  \hfill #6}}
+      \vspace{2mm}}
+   }
+   \end{center}
+   \markboth{#5 -- #1}{#5 -- #1}
+   \vspace*{4mm}
+}
+
+\newcommand{\problem}[2]{~\\\fbox{\textbf{Problem #1}}\hfill (#2 points)\newline\newline}
+\newcommand{\subproblem}[1]{~\newline\textbf{(#1)}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\Hy}{\mathcal{H}}
+\newcommand{\VS}{\textrm{VS}}
+\newcommand{\solution}{~\newline\textbf{\textit{(Solution)}} }
+
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bepsilon}{\boldsymbol{\epsilon}}
+\newcommand{\balpha}{\boldsymbol{\alpha}}
+\newcommand{\bbeta}{\boldsymbol{\beta}}
+\newcommand{\0}{\mathbf{0}}
+
+
+\begin{document}
+\homework{Homework \#3}{Due: 02/06/20}{Dr. Zafeirakis Zafeirakopoulos}{Gizem S\"ung\"u}{}{}
+\textbf{Course Policy}: Read all the instructions below carefully before you start working on the assignment, and before you make a submission.
+\begin{itemize}
+\item It is not a group homework. Do not share your answers to anyone in any circumstance. Any cheating means at least -100 for both sides. 
+\item Do not take any information from Internet.
+\item No late homework will be accepted. 
+\item For any questions about the homework, send an email to gizemsungu@gtu.edu.tr.
+\item Submit your homework (both your latex and pdf files in a zip file) into the course page of Moodle.
+\item Save your latex, pdf and zip files as "Name\_Surname\_StudentId".\{tex, pdf, zip\}.
+\item The answer which has only calculations without any formula and any explanation will get zero. 
+\item The deadline of the homework is 02/06/20 23:55.
+\end{itemize}
+
+\problem{1:}{15+20=35}
+Kuru Kahveci Mehmet Efendi (the producer), which is a coffee brand, supplies coffee beans to a coffee shop (the consumer) in Kadikoy. The coffee is supplied as 50 packages at each order and each package has 1 kg coffee beans. The consumer regards an order as acceptable provided that there are not more than 5 packages which have stale coffee beans. Rather than test all packages in the order, 10 packages are selected at random and tested.
+
+\subproblem{a} Find the probability that out of a sample of 10, d = 0, 1, 2, 3, 4, 5 are stale when there are actually 5 stale packages in the order.
+\solution
+
+The result of each draw (the elements of the population being sampled) can be classified into one of two mutually exclusive categories (e.g. Pass/Fail or Employed/Unemployed). So this is Hypergeometric Distribution. A random variable X follows the hypergeometric distribution if its probability mass function (pmf) is given by:
+
+\begin{align*}
+    p_x(k) &= \frac{\binom{K}{k}\binom{N-K}{n-k}}{\binom{N}{n}}
+\end{align*}
+
+where
+\begin{itemize}
+\item $N$ is the population size,
+\item $K$ is the number of success states in the population,
+\item $n$ is the number of draws (i.e. quantity drawn in each trial),
+\item $k$ is the number of observed successes,
+\item $\binom{a}{b}$ is a binomial coefficient.
+\end{itemize}
+
+Let's apply for each $d$'s.
+
+\begin{align*}
+     p_x(k) &= \frac{\binom{5}{d}\binom{45}{10-d}}{\binom{50}{10}}  \\ \\
+      \text{d=0} \implies \;\;\;\;\;  p_x(0) &= \frac{\binom{5}{0}\binom{45}{10}}{\binom{50}{10}} =0.3105\\ \\ 
+    \text{d=1} \implies \;\;\;\;\; p_x(1) &= \frac{\binom{5}{1}\binom{45}{9}}{\binom{50}{10}}= 0.4313\\\\ 
+    \text{d=2} \implies\;\;\;\;\; p_x(2) &= \frac{\binom{5}{2}\binom{45}{8}}{\binom{50}{10}}= 0.2098\\\\ 
+    \text{d=3} \implies\;\;\;\;\; p_x(3) &= \frac{\binom{5}{3}\binom{45}{7}}{\binom{50}{10}}=0.0441 \\\\ 
+    \text{d=4} \implies\;\;\;\;\; p_x(4) &= \frac{\binom{5}{4}\binom{45}{6}}{\binom{50}{10}}=0.0039  \\\\ 
+    \text{d=5}\implies \;\;\;\;\; p_x(5) &= \frac{\binom{5}{5}\binom{45}{5}}{\binom{50}{10}}= 0.0001 \\\\ 
+\end{align*}
+\newline
+\newline
+\subproblem{b} Suppose that the consumer will accept the order provided that not more than m stale packages are found in the sample of 10.
+\begin{itemize}
+	\item Find the probability that the order is accepted when there are 5 stale packages in the order.\\
+	\solution
+	   There are 5 stale packages. Again the same formula we apply above rules here:
+	   \begin{align*}
+	       P(X=x) &= \frac{\binom{5}{x}\binom{45}{10-x}}{\binom{50}{10}}  \;\;\; \text{(from above)}
+	   \end{align*}
+	We supposed that the consumer will accept the order provided that not more than m stale packages are found in the sample of 10. So it is accepted on $x\leq m$:
+	\begin{align*}
+	    P(X\leq m) &= \sum_{x=0}^{m}\frac{\binom{5}{x}\binom{45}{10-x}}{\binom{50}{10}}
+	\end{align*}
+	The probability function is $P(m) = \sum_{x=0}^{m}\frac{\binom{5}{x}\binom{45}{10-x}}{\binom{50}{10}}$.
+	\newline
+	\item Find the probability that the order is rejected when there are 3 stale packages in the order.\\
+	\solution
+	We supposed that the consumer will accept the order provided that not more than m stale packages are found in the sample of 10. So it is rejected on $x > m$:
+	    \begin{align*}
+	    P(X>m) &=  1 - P(X \leq m) \\ \\
+	    P(X\leq m) &= \sum_{x=0}^{m}\frac{\binom{3}{x}\binom{47}{10-x}}{\binom{50}{10}} \\ \\
+	    P(X>m) &= 1 - \sum_{x=0}^{m}\frac{\binom{3}{x}\binom{47}{10-x}}{\binom{50}{10}}
+	\end{align*}
+	The probability function is $P(m) =  1 - \sum_{x=0}^{m}\frac{\binom{3}{x}\binom{47}{10-x}}{\binom{50}{10}}$.
+	\newline
+\end{itemize}
+\problem{2:}{20+5=25}
+Hairdresser and barber shops reopened in Turkey under strict hygiene rules after almost two months at the 11th of May. Regarding to "new normal" rules, the number of customers arriving per hour at a hairdresser should be under control by the owner of the hairdresser shop. The hairdresser can accept at most 4 customers per hour with its conditions.
+Before arranging appointments with the customers, the owner wants to estimate whether there can be more demands than the owner can accept. The number of customers arriving per hour is assumed to follow
+a Poisson distribution with mean $\lambda$ = 6.
+
+\subproblem{a} Compute the probability that more than 12 customers will arrive in a 3-hour period.\\
+\solution
+The Poisson distribution is popular for modeling the number of times an event occurs in an interval of time or space. A discrete random variable X is said to have a Poisson distribution with parameter $\lambda$ > 0, if, for k = 0, 1, 2, ..., the probability mass function of X is given by
+
+\begin{align*}
+    f(k;\lambda) = \frac{\lambda^k e^{-\lambda}}{k!},
+\end{align*}
+
+where
+\begin{itemize}
+    \item e is Euler's number (e = 2.71828...)
+    \item k! is the factorial of k
+\end{itemize}.
+The positive real number $\lambda$ is equal to the expected value of X and also to its variance. Further, we'll deal with the cumulative probability, which adds up to 
+
+\begin{align*}
+    p(x;\lambda t) &= \frac{e^{-\lambda t}(\lambda t)^x}{x!} \\
+    P(r;\lambda t) &= \sum_{x=0}^{r}p(x;\lambda t)
+\end{align*}
+
+It's said that interval is 3-hour period. So $t=3$. And $\lambda = 6$. Hence, $\lambda t= 18$. We are looking for the probability of that more than 12 customers:
+
+\begin{align*}
+    P(x>12; 18) &= 1 - P(12;18) \\
+    &= 1- \sum_{x=0}^{12}p(x;18) \\
+    &= 1- \sum_{x=0}^{12} \frac{18^x}{e^{18}x!} \\
+    &= 1- (\frac{11586566069}{1925e^{18}}) \\
+    &= 0.9083
+\end{align*}
+\newline
+
+\subproblem{b} What is the mean number of arrivals during a
+3-hour period?\\
+\solution
+Mean number of arrivals:
+\begin{align*}
+    \mu &= \lambda t \\
+    \mu &= 6\times 3 \\
+    \mu &= 18
+\end{align*}
+\newline
+\problem{3:}{8+8+8+8+8=40}
+Given a normal distribution with $\mu$ = 35 and $\sigma$ = 7, find\\
+\subproblem{a} the normal curve area to the right of x = 21.\\
+\solution
+If X is a random variable from a normal distribution with mean $\mu$ and standard deviation $\sigma$, its Z-score may be calculated from X by subtracting $\mu$ and dividing by the standard deviation: 
+
+\begin{align*}
+    Z &= \frac{X-\mu}{\sigma} \\
+    Z &= \frac{X-35}{7} \;\;\; \text{(from given variables)}\\
+\end{align*}
+
+We are looking for the are to the right of $x=21$. It is $P(21<X)$.
+
+\begin{align*}
+    z &= \frac{21-35}{7} = -2 \;\;\; \text{(x=21)}
+\end{align*}
+
+We need to look for the table of standard normal distribution.
+\begin{align*}
+    P(Z<2) &= P(21<X) = 0.9773
+\end{align*}
+\newline
+\subproblem{b}  the normal curve area to the left of x = 25.\\
+\solution
+It is $P(X<25)$ we are looking for. Again,
+\begin{align*}
+    Z &= \frac{X-\mu}{\sigma} \\
+    Z &= \frac{X-35}{7} \\
+     &= \frac{25-35}{6} \\
+     &= \frac{-10}{7} \\
+     &= -1.4286 \\
+    P(Z<-1.4286) &= 0.0764
+\end{align*}
+\newline
+\subproblem{c}  the normal curve area between x = 32 and x = 41.\\
+\solution 
+It is $P (32 < X < 41)$ we are looking for.
+\begin{align*}
+    z_1 &= \frac{32-35}{7}\\
+    &= \frac{-3}{7} \\
+    &= -0.4286
+\end{align*}
+\begin{align*}
+    z_2 &= \frac{41-35}{7}\\
+    &= \frac{6}{7} \\
+    &= 0.8571
+\end{align*}
+\begin{align*}
+    P(32<X<41) &= P (−0.4286 < Z < 0.8571) \\
+    &= P (Z < 0.8571) − P (Z < −0.4286) \\
+    &= 0.8051 − 0.3336 \\
+    &= 0.4715
+\end{align*}
+\newline
+\subproblem{d} the value of x that has 60\% of the normal curve
+area to the left.\\
+\solution
+\begin{align*}
+    P (z < 0.25) &= 0.6 \\
+    x &= \sigma z + \mu \\
+    &= 7\times(0.25) + 35\\
+    &= 36.75 
+\end{align*}
+\newline
+\subproblem{e} the two values of x that contain the middle 75\% of
+the normal curve area.\\
+\solution
+\begin{align*}
+    P (x_1 < X < x_2 ) &= 0.75\\
+    &= P (X < x_2 ) - P (X < x_1 )\\
+    &= P (X < z_2 ) - P (X < z_1 ) \;\;\;  \text{($ z_1 = x_1, z_2= x_2$)} \\
+    &= P (X < z_2 ) - P (X < -z_2 ) \;\;\;  \text{($ z_1 = -z_2$)} \\
+    &= 2P (X < z_2 ) - 1 \\
+    &= 0.75 \\
+    P (z_2 < Z) &= 0.875 \\
+    z_2 &= 1.15 \;\;\; \text{(from the table, approximately)}
+\end{align*}
+Hence;
+\begin{align*}
+    x_1 &= \mu z + \rho \\
+    &= 7 \times (-1.15) + 35 \\
+    &= 26.95 \\
+    x_2 &= \mu z + \rho \\
+    &= 7 \times (1.15) + 35 \\
+    &= 43.05 \\ \\
+\end{align*}
+
+\end{document} 
+
+

@@ -1,0 +1,382 @@
+\documentclass[a4 paper]{article}
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage[ruled]{algorithm2e}
+\usepackage[rgb]{xcolor}
+\usepackage{verbatim}
+\usepackage{subcaption}
+\usepackage{amsgen,amsmath,amstext,amsbsy,amsopn,tikz,amssymb,tkz-linknodes}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true, urlcolor=blue,  linkcolor=blue, citecolor=blue]{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{rotating}
+\usepackage{booktabs}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{rem}[thm]{Remark}
+\numberwithin{equation}{section}
+
+\newcommand{\homework}[6]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{page}{1}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf MATH 118:~Statistics and Probability \hfill {\small (#2)}} }
+       \vspace{6mm}
+       \hbox to 6.28in { {\Large \hfill #1  \hfill} }
+       \vspace{6mm}
+       \hbox to 6.28in { {\it Instructor: {\rm #3} \hfill Name: Ahmed Semih Özmekik {\rm #5} \hfill Student Id: 171044039 {\rm #6}} \hfill}
+       \hbox to 6.28in { {\it Assistant: #4  \hfill #6}}
+      \vspace{2mm}}
+   }
+   \end{center}
+   \markboth{#5 -- #1}{#5 -- #1}
+   \vspace*{4mm}
+}
+
+\newcommand{\problem}[2]{~\\\fbox{\textbf{Problem #1}}\hfill (#2 points)\newline\newline}
+\newcommand{\subproblem}[1]{~\newline\textbf{(#1)}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\Hy}{\mathcal{H}}
+\newcommand{\VS}{\textrm{VS}}
+\newcommand{\solution}{~\newline\textbf{\textit{(Solution)}} }
+
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bepsilon}{\boldsymbol{\epsilon}}
+\newcommand{\balpha}{\boldsymbol{\alpha}}
+\newcommand{\bbeta}{\boldsymbol{\beta}}
+\newcommand{\0}{\mathbf{0}}
+
+
+\begin{document}
+\homework{Homework \#1}{Due: 15/03/20}{Dr. Zafeirakis Zafeirakopoulos}{Gizem S\"ung\"u}{}{}
+
+\problem{1: Counting Sample Points}{5+5+5=15}
+\subproblem{a} How many three-digit numbers can be formed from the digits 0, 1, 2, 3, 4, 5, and 6 if each digit can be used only once?\newline
+\solution We have 3 places and we have 6 numbers to put in these places. First, let's consider the first place. The number we will create must be 3 digits, so the first digit can never be zero, and we can only choose 6 out of 7 digits for the first digit. (We cannot put the number 0.) Since each number is wanted to be different, let's move on to the next digit, assuming that we use 1 of the 6 numbers we have chosen. If we include the zero number that we did not process in the previous digit, we have the right to choose 6 numbers in total. And finally, we can choose 5 of them in the last digit, because one has decreased. So it happened last as follows: \newline
+
+
+$6 \times 6 \times 5 = 180$ \newline
+
+It can be selected in $180$ different ways.
+
+
+\newline
+\subproblem{b} How many of these are odd numbers?\newline
+\solution Since it is desired to be the odd number, it would be wise to start (smallest) first digit first. Because in this way, we will first start choosing what we want for the first digit and continue. Among the 7 numbers, there are  3 odd numbers, and for the first digit, we can choose these 3 numbers. We can choose 6 different numbers in the second digit because we just spent one. But since we started from the smallest digit, there is a situation that concerns the third digit in our current election. Namely, for this digit, we were able to select 6 numbers in total, with one of the numbers [0, 1, 2, 3, 4, 5, 6] missing. But if one of our choices is 0, things change in the next step. If 0 is selected, 5 numbers can be selected in the next step. But if 0 is not selected, this time we have to subtract both the number 0 and the number selected in the second digit from our selection, and in this case we can choose 4 numbers. So let's assume that in the first stage, we first choose zero for the second digit. Our choice would be: \newline
+
+$5\times1\times3= 15$ \newline
+
+Next, let's consider the other situation in the second digit: The situation that we do not choose the exact number 0 and that the number 0 can come in the next digit. In this case, if we do not choose the 0 number, we can choose 5 numbers in total with our loss of 1 number from the previous digit. And if we subtract the number 0 and the other two numbers in the largest digit, we can choose 4 numbers in total. So it looks like this: \newline
+
+$4\times5\times3 = 60$ \newline
+
+$60 + 15 = 75$ \newline
+
+
+It can be selected in $75$ different ways.
+
+\newline
+\subproblem{c} How many are greater than 330?\newline
+\solution Again, in this question, we should divide the situation into two. First of all, let's assume that the third largest house is [4, 5, 6]. In this case, the number will always be greater than 330, regardless of the next digits. This was the first case, and we can choose it as follows: \newline
+
+$3\times6\times5 = 90$ \newline
+
+Or, let's imagine that we chose the biggest digit 3 for sure. Now for the number to be greater than 330, the number in the next household must be greater than 3. We have already spent 3 issues. So if we assume that the number must be equal to or greater than 4, we can choose the numbers [4, 5, 6]. In this case, you can choose in different ways: \newline
+
+$1\times3\times5 = 15$ \newline
+
+$90 + 15 = 105$ \newline
+
+It can be selected in 105 different ways.
+
+\newline
+
+
+
+\problem {2: Conditional Probability, Independence, and the Product Rule}{10+10=20}
+The probability that a randomly chosen coffee machine will need a coffee bean change is 0.25; the probability that it needs a new filter is 0.40; and the probability that both the bean and filter need changing is 0.14.\newline
+\subproblem{a} If the bean has to be changed, what is the probability that a new filter is needed?\newline
+\solution We have two events happening here. And there is a condition relationship between each other. For this reason, let's first show our events with notation and explain this relationship. Let A be the event for coffee bean change. Let B the event for filter change. We are looking for, $P(B|A)$. Hence; \newline
+
+$P(A)= 0.25$,       $P(B) = 0.40$,            
+$P(B|A) = \frac{P(A\cap B)}{P(A)} = \frac{0.14}{0.25} = 0.56$ \\
+
+
+\newline
+\subproblem{b} If a new filter is needed, what is the probability that the bean has to be changed?\newline \solution Now the condition is reversed. Meaning that, we are looking for, $P(A|B)$. Hence; \newline
+
+$P(A)= 0.25$,       $P(B) = 0.40$,            
+$P(B|A) = \frac{P(A\cap B)}{P(B)} = \frac{0.14}{0.40} = 0.35$ \\
+\newline
+\problem{3: Conditional Probability, Independence, and the Product Rule}{5+5+5+5 = 20}
+Before the distribution of certain task, every fourth machine is tested for accuracy. The testing process consists of running four independent tasks and checking the results. The failure rates for the four testing tasks are, respectively, 0.01, 0.03, 0.02, and 0.01.\newline
+
+\subproblem{a}What is the probability that a machine was tested and
+failed any test?\newline
+\solution $A$ is event for selection. $F_1$,$F_2$,$F_3$ and $F_4$ are the events for failure. Those two event are independent events. Being tested and failed any test for any event can be shown as $A \cap (F_1 \cup F_2 \cup F_3 \cup F_4$). And since they are independent too, they can be shown as:
+
+\begin{equation*}
+    \begin{split}
+        P(A \cap (F_1 \cup F_2 \cup F_3 \cup F_4))&=P(F_1 \cup F_2 \cup F_3 \cup F_4)\times P(A)\\
+        &=[P(F_1)+P(F_2)+P(T_3)+P(T_4)]\times P(A)\\
+        &=(\frac{1}{100}+\frac{3}{100}+\frac{2}{100}+\frac{1}{100})\times(\frac{25}{100}) \\ 
+        &=\frac{175}{10000}\\
+        &= 0.0175
+    \end{split}{}
+\end{equation*}{}
+
+\newline
+\subproblem{b} Given that a machine was tested, what is the probability
+that it failed task 2 or 3?\newline
+\solution $A$, $F_2$ and $F_3$ are independent events. Due to that they can be shown as, (since they are independent, and also $F_2$ and $F_3$ are independent too):
+
+
+\begin{equation*}
+    \begin{split}
+        P((F_2 \cup F_3) | A) &= P(F_2 \cup F_3) \\
+        P(F_3 \cup F_2) &= P(F_2) + P(F_3) \\
+        &= \frac{5}{100}\\
+        &= 0.05
+    \end{split}{}
+\end{equation*}{}
+
+\newline
+\subproblem{c} In a sample of 100, how many machines would you expect to be rejected?\newline
+\solution For this problem we are in concern with the same event as the problem $a$. That event has a probability of $0.0175$, as we discussed. In as sample of 100, it becomes $100*0.0175=1.75$. $1\leqslant x \leqslant2$, hence one or two machines are going to be rejected. (out of 100)
+\newline
+\subproblem{d} Given that a machine was defective, what is the probability that it was tested?\newline
+\solution $F$ = $F_1 \cup F_2 \cup F_3 \cup F_4$. Event is $P(A|F)$ (they are independent.)
+
+\begin{equation*}
+    \begin{split}
+        P(A|T) &= P(A) \\
+        &= \frac{25}{100} \\
+        &= 0.25
+    \end{split}{}
+\end{equation*}{}
+
+\newline
+\problem{4: Random Variables }{1+1+1+1+1=5}
+Classify the following random variables as discrete or continuous:\newline
+\subproblem{a} X: the number of automobile accidents per year
+in Virginia.\newline
+\solution It is discrete. Car accidents are countable.
+\newline
+\subproblem{b} Y: the length of time to play 18 holes of golf.\newline
+\solution It is continuous. Because time can't be (exactly) measured with infinite precision.
+\newline
+\subproblem{c} M: the amount of milk produced yearly by a particular cow.\newline
+\solution
+It is continuous. Because produced milk can't be (exactly) measured with infinite precision. 
+
+\newline
+\subproblem{d} N: the number of eggs laid each month by a hen.\newline
+\solution
+It is discrete. Because those eggs are countable.
+
+\newline
+\subproblem{e} P: the number of building permits issued each
+month in a certain city.\newline
+\solution
+It is discrete. We can count the number of building permits issued each month in a certain city.
+
+\newpage
+\problem{5: Probability Distributions of Random Variables}{5+5+5+5=20}
+An investment firm offers its customers municipal bonds that mature after varying numbers of years. Given that the cumulative distribution function of T , the number of years to maturity for a randomly selected bond, is\newline
+F(t) =     $\left\{ 
+                \begin{array}{rcl}
+                     0, & t < 1, \\
+                     &\\
+                      \frac{1}{4}, & 1 \leq t < 3,\\
+                      &\\
+                      \frac{1}{2}, & 3 \leq t < 5,\\
+                      &\\
+                      \frac{3}{4}, & 5 \leq t < 7,\\
+                      &\\
+                      1, & t \geq 7
+                 \end{array}
+            \right.$
+
+
+
+Find
+
+\subproblem{a} P(T = 5)\newline
+\solution
+
+\begin{equation*}
+\begin{split}
+    F(T) & = P(T=5) + F(T-1)\\
+    F(5) & = P(T=5) + F(4)\\
+    P(T=5) & = F(5) - F(4)\\
+    \frac{3}{4} + \frac{1}{2} & = \frac{1}{4}\\
+    P(T=5) & = \frac{1}{4}
+\end{split}{}
+\end{equation*}{}
+
+\newline
+\subproblem{b} P(T $>$ 3)\newline
+\solution
+
+\begin{equation*}
+\begin{split}
+    P(T>3) & = P(T=4) + P(T=5) + P(T=6) + P(T=7) +  ... 
+\end{split}{}
+\end{equation*}{}
+
+
+For $t>7$, $F(t) = 1$. And $F(t) = P(T=t) + F(t-1)$, then for $t>7$, $F(t>7) = P(T=t) + F(t>8)$, Thus $1 = P(T=t) + 1$ and $P(T=t) = 0$. 
+Since $F(t) = P(T=t) + F(t-1)$ and $F(t) = F(t-1)$: 
+
+
+
+\begin{equation*}
+\begin{split}
+P (T > 3) &= P (T = 4) + P (T = 5) + P (T = 6) + P (T = 7)\\
+F (4) &= P (T = 4) + F \\
+P (T = 4) &= 0\\
+P (T = 5) &= 1/4 \\
+F (6) &= P (T = 6) + F \\
+P (T = 6) &= 0 \\
+F (7) &= P (T = 7) + F \\
+P (T = 7) &= \frac{1}{4} \\
+P (T > 3) &= 0 + \frac{1}{4} + 0 + \frac{1}{4} = \frac{1}{4}
+\end{split}{}
+\end{equation*}{}
+\newline
+\subproblem{c} P(1.4 $<$ T $<$ 6)\newline
+\solution
+
+\begin{equation*}
+    \begin{split}
+        P (1.4 < T < 6)& = P (T = 2) + P (T = 3) + P (T = 4) + P (T = 5)
+    \end{split}{}
+\end{equation*}{}
+
+We can conclude this equation:
+
+\begin{equation*}
+\begin{split}
+    F (2)& = f (2) + F (1)\\
+    f(2) &= 0
+    \end{split}{}
+\end{equation*}{}
+
+And this equation:
+
+\begin{equation*}
+\begin{split}
+    F (3) &= f (3) + F (2)\\
+    f (3) &= \frac{1}{2} - \frac{1}{4}\\
+         &= \frac{1}{4} \\
+\end{split}{}
+\end{equation*}{}
+
+And, hence from this equations we have: 
+\begin{equation*}
+\begin{split}
+   P (1.4 <T< 6) &= 0 + \frac{1}{4} + 0 + \frac{1}{4}\\
+                 &= \frac{1}{2}
+\end{split}{}
+\end{equation*}{}
+\newline
+\subproblem{d} P(T $\leq$ 5 $|$ T $\geq$ 2)\newline
+\solution T $\geq$ 2 is given to us:
+
+\begin{equation*}
+    \begin{split}
+        P(T \leq 5 | T \geq 2) &= P (T = 2) + P (T = 3) + P (T = 4) + P (T = 5)\\
+        &= P (1.4 < T < 6)
+    \end{split}{}
+\end{equation*}{}
+
+From the previous problem, we can conclude:
+
+\begin{equation*}
+    \begin{split}
+        P(T \leq 5 | T \geq 2) &= \frac{1}{2}
+    \end{split}{}
+\end{equation*}{}
+\newline
+\newpage
+\problem{6: Probability Distributions of Random Variables}{5+5+10=20}
+A manufacturer is aware that the weight of the product in the box varies slightly from box to box. There is a density function which is obtained from historical data. The density function describes the probability structure for the weight (inounces). Letting X be the random variable weight, inounces, the density function can be described as\newline
+\newline
+
+f(x) =     $\left\{ 
+                \begin{array}{rcl}
+                     \frac{2}{5}, & 23.75 \leq x \leq 26.25 \\
+                              &\\
+                      0, & elsewhere
+                 \end{array}
+            \right.$
+\newline
+\subproblem{a} Verify that this is a valid density function.\newline
+\solution It must satisfy those 3 condition.
+
+\renewcommand\labelitemi{$\diamond$}
+
+\begin{itemize}
+\item For all $x\inR$, $f(x)\geq 0$. It is satisfied as you can see from above.
+\item \begin{equation*}
+    \begin{split}
+        \int_{- \infty}^{\infty}f(x)dx &= \int_{- \infty}^{23.75}f(x)dx+\int_{23.75}^{26.25}f(x)dx+\int_{26.25}^{\infty}f(x)dx \\
+        &= \frac{2}{5}x\mid_{23.75}^{26.25}\\
+        &=1.
+    \end{split}{}
+\end{equation*}{}
+
+It is satisfied.
+
+\item $P(a<X<b)= \int_{a}^{b}f(x)dx$. It is satisfied.
+
+\end{itemize}
+\newline
+\subproblem{b} Determine the probability that the weight is smaller than 24 ounces.\newline
+\solution
+\begin{equation*}
+    \begin{split}
+    P(a<X<b)& = \int_{a}^{b}f(x)dx \\
+    P(- \infty <X<24)&= \int_{-\infty}^{24}f(x)dx \\
+        P(- \infty <X<24) &= \int_{-\infty}^{24}f(x)dx \\
+        &= \int_{-\infty}^{23.75}f(x)dx+ \int_{23.75}^{24}f(x)dx \\
+        &= \int_{23.75}^{24} \frac{2}{5} dx \\
+        &= \frac{2}{5}x\mid_{23.75}^{24} \\
+        &= \frac{2}{5}\times\frac{1}{4} \\
+        &= 0.1
+    \end{split}{}
+\end{equation*}{}
+\newline
+\subproblem{c} The company desires that the weight exceeding 26 ounces be an extremely rare occurrence. What is the probability that this rare occurrence does actually occur?\newline
+\solution
+\begin{equation*}
+    \begin{split}
+        P(26 <X< \infty) &= \int_{26}^{\infty}f(x)dx \\
+        &= \int_{26}^{26.25}f(x)dx+ \int_{26.25}^{\infty}f(x)dx \\
+        &= \int_{26}^{26.25} \frac{2}{5} dx \\
+        &= \frac{2}{5}x\mid_{26}^{26.25} \\
+        &= \frac{2}{5}\times\frac{1}{4} \\
+        &= 0.1
+    \end{split}{}
+\end{equation*}{}
+
+
+\newline
+\end{document} 
+
+
